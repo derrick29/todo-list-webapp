@@ -1,0 +1,40 @@
+.container {
+    margin-top: 5%;
+}
+
+.select {
+    width: 100%;
+}
+
+.left-panel {
+    border-right: 1px solid grey;
+}
+
+.todos-title {
+    padding: 5px 10px;
+    font-size: 17px;
+    display: flex;
+}
+
+.todos-title-text {
+    width: 90%;
+}
+
+.todos-title:hover, .todos-title-text:hover {
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: #ccc;
+}
+
+.todos {
+    height: 350px;
+}
+
+.right-panel {
+    padding-top: 25px;
+}

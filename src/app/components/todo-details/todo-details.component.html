@@ -1,0 +1,39 @@
+<div class="todos-heading">
+    <h1 class="title selected-todo-title">{{todos.selectedTodo.todoTitle}}</h1>
+    <div class="field has-addons">
+      <div class="control">
+        <input class="input" type="text" placeholder="Add todo Item" name="todoItemInput" [(ngModel)]="todos.todoItemInput">
+      </div>
+      <div class="control">
+        <a class="button is-info" (click)="addTodo()">
+          Add Item
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="block"></div>
+  <div class="todo-body">
+    <div class="lds-ellipsis" *ngIf="todos.isTodoItemsLoading"><div class="lds-ellipsis1"></div><div class="lds-ellipsis2"></div><div class="lds-ellipsis3"></div><div></div></div>
+    <ng-container *ngIf="!todos.isTodoItemsLoading">
+      <div class="todo-item" *ngFor="let item of todos.selectedTodo.todoItems">
+        <div class="todo-item-left">
+          <label class="checkbox">
+            <input type="checkbox" disabled *ngIf="!isEditing" [attr.checked]="item['is_done'] ? 'checked': null"/>
+            <input type="checkbox" *ngIf="isEditing" [attr.checked]="item['is_done'] ? 'checked': null" (change)="checkChange($event, item['todo_item_id'], !item['is_done'])"/>
+            <span class="todo-text">{{item['todo_item_title']}}</span>
+          </label>
+        </div>
+        <div class="todo-item-right" *ngIf="!isEditing">
+          <button class="delete is-medium" (click)="deleteTodo(item['todo_item_id'])"></button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="block"></div>
+  <div class="actions">
+    <button class="button is-warning" *ngIf="!isEditing" (click)="editOrSave()">Edit</button>
+    <button class="button is-info" *ngIf="isEditing" (click)="editOrSave()">Save</button>
+    <button class="button is-warning cancel-edit" *ngIf="isEditing" (click)="cancelEdit()">Cancel</button>
+  </div>
+  
+ 

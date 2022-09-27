@@ -1,0 +1,32 @@
+<h1 class="title">Welcome to TODO List :D</h1>
+<div class="card">
+    <header class="card-header">
+        <h1 class="card-header-title">
+            Login or Register
+        </h1>
+    </header>
+    <div class="card-content">
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+              <input class="input" type="text" placeholder="Username" name="username" [(ngModel)]="inputsData.username">
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="password" placeholder="Password" name="password" [(ngModel)]="inputsData.password">
+            </p>
+          </div>
+          <div class="field is-grouped is-grouped-centered">
+            <p class="control">
+              <a class="button is-primary" (click)="login()">
+                Login
+              </a>
+            </p>
+            <p class="control">
+              <a class="button is-light" (click)="register()">
+                Register
+              </a>
+            </p>
+          </div>
+    </div>
+  </div>

@@ -1,0 +1,52 @@
+<div class="columns">
+    <div class="column is-one-quarter left-panel">
+        <div class="todos-heading">
+            <h1 class="title">My TODOs</h1>
+            <h2 class="subtitle">{{username}}</h2>
+            <button class="button is-danger" (click)="logout()">logout</button>
+        </div>
+        <div class="block"></div>
+        <div class="field has-addons">
+            <div class="control">
+              <input class="input" type="text" placeholder="Add todo" name="todoInput" [(ngModel)]="todoInput">
+            </div>
+            <div class="control">
+              <a class="button is-info" (click)="addTodo()">
+                Add
+              </a>
+            </div>
+          </div>
+          <div class="block"></div>
+        <hr class="divider" />
+        <div class="todos">
+            <div class="todos-title" *ngFor="let item of todos.todos">
+                <div class="todos-title-text" (click)="selectTodo(item['todo_id'])">
+                    {{item['todo_title']}}
+                </div>
+                <div class="todo-item-right">
+                    <button class="delete is-medium" (click)="deleteTodo(item['todo_id'])"></button>
+                </div>
+            </div>
+        </div>
+        <hr class="divider" />
+        <div class="todos-pagination">
+        <nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
+            <a class="pagination-previous" (click)="prevPage()">Previous</a>
+            <a class="pagination-next" (click)="nextPage()">Next</a>
+            <ul class="pagination-list">
+            <li><a class="pagination-link" aria-label="Goto page 1" [class.is-current]="this.todos.selectedPage == 1" (click)="getPage(1)">1</a></li>
+            <ng-container *ngIf="this.todos.totalPages > 2">
+                <li><span class="pagination-ellipsis" *ngIf="this.todos.totalPages > 3 && this.todos.selectedPage > 3">&hellip;</span></li>
+                <li><a class="pagination-link" *ngFor="let page of this.todos.pageNumbers" [class.is-current]="this.todos.selectedPage == page" (click)="getPage(page)">{{page}}</a></li>
+                <li><span class="pagination-ellipsis" *ngIf="this.todos.totalPages > 3 && this.todos.selectedPage < this.todos.totalPages - 2">&hellip;</span></li>
+            </ng-container>
+            <li *ngIf="this.todos.totalPages > 1" (click)="getPage(this.todos.totalPages)"><a class="pagination-link" [class.is-current]="this.todos.selectedPage == this.todos.totalPages">{{this.todos.totalPages}}</a></li>
+            </ul>
+        </nav>
+        </div>
+    </div>
+    <div class="column right-panel">
+        <app-todo-details *ngIf="todos.selectedTodo.todoTitle != ''"></app-todo-details>
+        <h1 class="title" *ngIf="todos.selectedTodo.todoTitle == ''">Select TODO to view items</h1>
+    </div>
+</div>
